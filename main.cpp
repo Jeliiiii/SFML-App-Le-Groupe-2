@@ -1,19 +1,29 @@
-#include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
+#include "main.hpp"
 
+Input input;
 
-// Fonction main, point de départ du programme
 int main()
 {
+    RenderWindow window(VideoMode(WIN_WIDTH, WIN_HEIGHT), "Titre de la fenêtre");
 
-    // Création de la fenêtre avec taille et titre
-    sf::Window window;
-    window.create(sf::VideoMode(800, 600), "Mon Titre");
+    window.setVerticalSyncEnabled(true);
 
-    // Modification du titre de la fenêtre
-    window.setTitle("Titre modifié");
+    while (window.isOpen()) 
+    {
+        Event event;
+
+        while (window.pollEvent(event))
+        {
+            input.InputHandler(event, window);
+        }
+
+        window.clear(Color::Black);
+
+        // C'est ici qu'on dessine les éléments du jeu
 
 
-    // Fin du programme
+        window.display();
+    }
+
     return 0;
 }
