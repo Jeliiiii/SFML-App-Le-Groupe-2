@@ -1,21 +1,28 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <vector>
 
 using namespace sf;
 using namespace std;
 
 class Input
 {
-	struct Button { bool left, right, space, escape; };
+	bool shoot;
+	bool escape;
+	Vector2i mousePosition;
+	
 
 public:
-	Input();
+	Input(RenderWindow& window);
 
 	//Prototypes fonctions
-	Button GetButton(void) const;
+	Mouse GetMouse(Mouse getPosition(const RenderWindow& window));
 	void InputHandler(Event event, RenderWindow& window);
+	//int Mouse(int x, int y);
 
 private:
-	Button button;
+	bool shoot;
+	bool escape;
+	Mouse mouse;
 };
