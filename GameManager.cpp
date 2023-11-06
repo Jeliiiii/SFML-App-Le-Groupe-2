@@ -1,4 +1,4 @@
-#include "game.hpp"
+#include "GameManager.hpp"
 
 Input::Input()
 {
