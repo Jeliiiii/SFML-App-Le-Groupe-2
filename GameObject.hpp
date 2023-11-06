@@ -1,13 +1,22 @@
 #pragma once
+#include <iostream>
+
+using namespace std;
+
 class GameObject
 {
+	struct Properties { int x, y, width, heigh; string color; };
+
 public:
 	GameObject();
 	~GameObject();
 
 private:
-	int position;
-	int size;
+	int x;
+	int y;
+	int width;
+	int height;
+	char color;
 	
 };
 
