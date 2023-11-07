@@ -1,10 +1,9 @@
 #include "GameManager.hpp"
 
-Input::Input(RenderWindow& window)
+Input::Input()
 {
 	shoot = false;
 	escape = false;
-	mousePosition = Mouse::getPosition(window);
 }
 
 void Input::InputHandler(Event event, RenderWindow& window)
