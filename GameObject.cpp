@@ -20,6 +20,10 @@ Shape* GameObject::getShape() {
 	return pShape;
 }
 
+GameObject::move(float x, float y, float speed) {
+
+}
+
 /*GameObject::
 
 int GameObject::setRotation(float rotationAngle) {
