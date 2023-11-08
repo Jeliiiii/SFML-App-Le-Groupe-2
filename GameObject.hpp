@@ -26,5 +26,6 @@ private:
     float y; // Position Y
     float r; // Rayon (pour les cercles)
     float rotationAngle; // Angle de rotation (pour certains objets)
+    vector<float> speed;
 
 };
