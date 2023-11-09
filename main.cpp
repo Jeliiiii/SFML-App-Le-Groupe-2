@@ -41,7 +41,7 @@ int main()
 		//rect3.Move(deltaTime);
 
         window.draw(*circ.getShape());
-		circ.Move(deltaTime, directionCirc);
+		circ.Move(deltaTime);
 
 		deltaTime = deltaClock.restart().asSeconds();
         window.display();

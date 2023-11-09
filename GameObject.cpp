@@ -13,8 +13,9 @@ GameObject::GameObject(float x, float y, float w, float h, float speed, Color co
 	this->color = color;
 
 	pShape = new RectangleShape(Vector2f(w, h));
-	pShape->setPosition(x, y);
+	pShape->setPosition(position.x, position.y);
 	pShape->setFillColor(color);
+	pShape->setOrigin(w / 2.0f, h / 2.0f);
 
 };
 
@@ -28,19 +29,20 @@ GameObject::GameObject(float x, float y, float r, float speed, Color color) {
 	this->color = color;
 	
 	pShape = new CircleShape(r);
-	pShape->setPosition(x, y);
+	pShape->setPosition(position.x, position.y);
 	pShape->setFillColor(color);
+	pShape->setOrigin(w / 2.0f, h / 2.0f);
 
 }
 
-//void GameObject::Orientation(float x, float y, float w, float h) {
-//
-//	p
-//
-//}
-
 Vector2f GameObject::getPosition(){
 	return position;
+}
+
+void GameObject::setOrigin(float x, float y) {
+	position.x = x;
+	position.y = y;
+
 }
 
 
