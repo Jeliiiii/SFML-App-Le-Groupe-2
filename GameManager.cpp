@@ -3,7 +3,6 @@
 Input::Input()
 {
 	shoot = false;
-	escape = false;
 }
 
 void Input::InputHandler(Event event, RenderWindow& window)
@@ -13,10 +12,18 @@ void Input::InputHandler(Event event, RenderWindow& window)
 		window.close();
 	}
 
-	if (event.type == Mouse::Left)
+	if (event.type == Event::KeyPressed)
 	{
-		shoot = true;
-	}
+		if (event.key.code == Keyboard::Escape){
+			window.close();
+		}
 
-	Mouse::getPosition();
+		if (event.key.code == Mouse::Left) {
+			shoot = true;
+		}
+	}
+}
+
+bool Input::Shoot(){
+	return shoot;
 }

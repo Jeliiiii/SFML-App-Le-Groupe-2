@@ -46,10 +46,10 @@ void GameObject::setOrigin(float x, float y) {
 }
 
 
-void GameObject::Move(float deltaTime, RenderWindow& window) {
+void GameObject::Move(float deltaTime) {
 
-	Vector2i mousePosition = Mouse::getPosition(window);
-	Vector2f mousePositionLocal = window.mapPixelToCoords(mousePosition);
+	/*Vector2i mousePosition = Mouse::getPosition(window);
+	Vector2f mousePositionLocal = window.mapPixelToCoords(mousePosition);*/
 	Vector2f direction = mousePositionLocal - GameObject::getPosition();
 
 	float magnitude = sqrt(direction.x * direction.x + direction.y * direction.y);

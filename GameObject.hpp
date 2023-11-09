@@ -17,7 +17,7 @@ public:
     GameObject(float x, float y, float r, float speed, Color color); // Constructeur pour les cercles
 
     Shape* getShape(); // Fonction pour obtenir la forme du GameObject
-	void Move(float deltaTime, RenderWindow& window);
+	void Move(float deltaTime);
     void setOrigin(float x, float y);
     Vector2f getPosition();
 

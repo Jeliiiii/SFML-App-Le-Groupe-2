@@ -14,8 +14,8 @@ public:
 	//Prototypes fonctions
 
 	void InputHandler(Event event, RenderWindow& window);
+	bool Shoot();
 
 private:
 	bool shoot;
-	bool escape;
 };

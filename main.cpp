@@ -18,6 +18,9 @@ int main()
     while (window.isOpen()) 
     {
         Event event;
+		Vector2i mousePosition = Mouse::getPosition(window);
+		Vector2f mousePositionLocal = window.mapPixelToCoords(mousePosition);
+		//Vector2f direction = mousePositionLocal - circ.getPosition();
 
         while (window.pollEvent(event))
         {
@@ -41,7 +44,9 @@ int main()
 		//rect3.Move(deltaTime);
 
         window.draw(*circ.getShape());
-		circ.Move(deltaTime);
+        if (input.Shoot() == true) {
+            circ.Move(deltaTime);
+        }
 
 		deltaTime = deltaClock.restart().asSeconds();
         window.display();
