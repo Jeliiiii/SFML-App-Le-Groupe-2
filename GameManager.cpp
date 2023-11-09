@@ -12,4 +12,11 @@ void Input::InputHandler(Event event, RenderWindow& window)
 	{
 		window.close();
 	}
+
+	if (event.type == Mouse::Left)
+	{
+		shoot = true;
+	}
+
+	Mouse::getPosition();
 }

@@ -18,21 +18,21 @@ public:
 
     Shape* getShape(); // Fonction pour obtenir la forme du GameObject
 
-	void Move(float deltaTime);
+	void Move(float deltaTime, RenderWindow& window);
+    Vector2f getPosition();
 
 private:
-
     Shape* pShape; // Pointeur vers la forme graphique (rectangle, cercle ou autre)
     Color color;
     float w; // Largeur
     float h; // Hauteur
-    float x; // Position X
-    float y; // Position Y
     float r; // Rayon (pour les cercles)
     float rotationAngle; // Angle de rotation (pour certains objets)
 	float speed;
-    float vx;
-    float vy;
-    vector<float> direction {vx, vy};
-
+    float vx; //Vecteur de vitesse x
+    float vy; //Vecteur de vitesse y
+    Vector2f position; //Position;
+    Vector2i mousePosition;
+    Vector2f mousePositionLocal;
+    Vector2f direction;
 };
