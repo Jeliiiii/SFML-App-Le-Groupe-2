@@ -25,6 +25,9 @@ int main()
         while (window.pollEvent(event))
         {
             input.InputHandler(event, window);
+            if (input.Shoot() == true) {
+                circ.Move(deltaTime);
+            }
         }
 
         window.clear(Color::Black);
@@ -44,9 +47,9 @@ int main()
 		//rect3.Move(deltaTime);
 
         window.draw(*circ.getShape());
-        if (input.Shoot() == true) {
+        /*if (input.Shoot() == true) {
             circ.Move(deltaTime);
-        }
+        }*/
 
 		deltaTime = deltaClock.restart().asSeconds();
         window.display();

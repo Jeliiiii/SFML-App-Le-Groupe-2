@@ -17,8 +17,10 @@ void Input::InputHandler(Event event, RenderWindow& window)
 		if (event.key.code == Keyboard::Escape){
 			window.close();
 		}
+	}
 
-		if (event.key.code == Mouse::Left) {
+	if (event.type == Event::MouseButtonPressed) {
+		if (event.mouseButton.button == Mouse::Left) {
 			shoot = true;
 		}
 	}
