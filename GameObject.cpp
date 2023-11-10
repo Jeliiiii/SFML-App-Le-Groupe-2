@@ -1,6 +1,6 @@
-#include "GameObject.hpp"
 #include <iostream>
 #include <cmath>
+#include "GameManager.hpp"
 
 GameObject::GameObject(float x, float y, float w, float h, float speed, Color color) 
 {
@@ -55,7 +55,7 @@ void GameObject::Move(float deltaTime)
 
 	/*Vector2i mousePosition = Mouse::getPosition(window);
 	Vector2f mousePositionLocal = window.mapPixelToCoords(mousePosition);*/
-	Vector2f direction = mousePositionLocal - GameObject::getPosition();
+	Vector2f direction = Input::getMousePositionLocal() - GameObject::getPosition();
 
 	float magnitude = sqrt(direction.x * direction.x + direction.y * direction.y);
 	if (magnitude != 0) 
@@ -67,6 +67,12 @@ void GameObject::Move(float deltaTime)
 	position.y += deltaTime * speed * direction.y;
 	pShape->setPosition(position.x, position.y);
 
+}
+
+void GameObject::setRotation(float angle)
+{
+	rotationAngle = angle;
+	pShape->setRotation(angle);
 }
 
 Shape* GameObject::getShape() 

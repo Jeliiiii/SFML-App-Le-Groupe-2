@@ -18,10 +18,23 @@ void Input::InputHandler(Event event, RenderWindow& window)
 		{
 			window.close();
 		}
+	}
 
-		if (event.key.code == Mouse::Left) 
+	if (event.type == Event::MouseButtonPressed)
+	{
+		if (event.mouseButton.button == Mouse::Left)
 		{
+			Vector2i mousePosition = Mouse::getPosition(window);
+			Vector2f mousePositionLocal = window.mapPixelToCoords(mousePosition);			
 			shoot = true;
+		}
+	}
+
+	if (event.type == Event::MouseButtonReleased)
+	{
+		if (event.mouseButton.button == Mouse::Left)
+		{
+			shoot = false;
 		}
 	}
 }
@@ -29,4 +42,14 @@ void Input::InputHandler(Event event, RenderWindow& window)
 bool Input::Shoot()
 {
 	return shoot;
+}
+
+Vector2i Input::getMousePosition()
+{
+	return mousePosition;
+}
+
+Vector2i Input::getMousePositionLocal()
+{
+	return mousePositionLocal;
 }

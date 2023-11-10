@@ -1,4 +1,5 @@
 #pragma once 
+#include "GameManager.hpp"
 #include <SFML/Graphics.hpp> 
 #include <iostream>
 #include <vector> 
@@ -18,6 +19,7 @@ public:
 
     Shape* getShape(); // Fonction pour obtenir la forme du GameObject
 	void Move(float deltaTime);
+    void setRotation(float angle);
     void setOrigin(float x, float y);
     Vector2f getPosition();
 
@@ -29,10 +31,6 @@ private:
     float r; // Rayon (pour les cercles)
     float rotationAngle; // Angle de rotation (pour certains objets)
 	float speed;
-    float vx; //Vecteur de vitesse x
-    float vy; //Vecteur de vitesse y
     Vector2f position; //Position;
-    Vector2i mousePosition;
-    Vector2f mousePositionLocal;
     Vector2f direction;
 };

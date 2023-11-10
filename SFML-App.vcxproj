@@ -142,6 +142,7 @@
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameManager.hpp" />

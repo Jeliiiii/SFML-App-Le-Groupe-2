@@ -6,7 +6,7 @@ float deltaTime = 0; //Variable qui reset la clock à 0 et récupère le temps qui 
 
 int main()
 {
-    RenderWindow window(VideoMode(WIN_WIDTH, WIN_HEIGHT), "Titre de la fenêtre");
+    RenderWindow window(VideoMode(WIN_WIDTH, WIN_HEIGHT), "Casse-briques");
 
     window.setVerticalSyncEnabled(true);
 
@@ -17,22 +17,28 @@ int main()
 
     while (window.isOpen()) 
     {
-        Event event;
-		Vector2i mousePosition = Mouse::getPosition(window);
-		Vector2f mousePositionLocal = window.mapPixelToCoords(mousePosition);
-		//Vector2f direction = mousePositionLocal - circ.getPosition();
 
+        Event event;
+		
         while (window.pollEvent(event))
         {
             input.InputHandler(event, window);
+			if (input.Shoot() == true)
+			{
+				circ.Move(deltaTime);
+			}
+            float deltaX = input.getMousePositionLocal().x - circ.getPosition().x;
+            float deltaY = input.getMousePositionLocal().y - circ.getPosition().y;
+
+            float angleRadians = atan2(deltaY, deltaX);
+            float angleDegrees = angleRadians * (180.0f / 3.14159f);
+
+            circ.setRotation(angleDegrees);
         }
 
         window.clear(Color::Black);
 
-
         // C'est ici qu'on dessine les éléments du jeu
-
-		
 
         window.draw(*rect.getShape());
         //rect.Move(deltaTime);
@@ -44,10 +50,6 @@ int main()
 		//rect3.Move(deltaTime);
 
         window.draw(*circ.getShape());
-        if (input.Shoot() == true) 
-        {
-            circ.Move(deltaTime);
-        }
 
 		deltaTime = deltaClock.restart().asSeconds();
         window.display();
