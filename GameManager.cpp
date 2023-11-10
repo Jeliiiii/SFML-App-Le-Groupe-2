@@ -20,12 +20,17 @@ void Input::InputHandler(Event event, RenderWindow& window)
 		}
 	}
 
+<<<<<<< HEAD
 	if (event.type == Event::MouseButtonPressed)
 	{
 		if (event.mouseButton.button == Mouse::Left)
 		{
 			Vector2i mousePosition = Mouse::getPosition(window);
 			Vector2f mousePositionLocal = window.mapPixelToCoords(mousePosition);			
+=======
+	if (event.type == Event::MouseButtonPressed) {
+		if (event.mouseButton.button == Mouse::Left) {
+>>>>>>> ebdc6becba364579115c1e113ebb1d66e8863c79
 			shoot = true;
 		}
 	}

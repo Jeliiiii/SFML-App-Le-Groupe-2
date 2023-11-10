@@ -23,6 +23,7 @@ int main()
         while (window.pollEvent(event))
         {
             input.InputHandler(event, window);
+<<<<<<< HEAD
 			if (input.Shoot() == true)
 			{
 				circ.Move(deltaTime);
@@ -34,6 +35,11 @@ int main()
             float angleDegrees = angleRadians * (180.0f / 3.14159f);
 
             circ.setRotation(angleDegrees);
+=======
+            if (input.Shoot() == true) {
+                circ.Move(deltaTime);
+            }
+>>>>>>> ebdc6becba364579115c1e113ebb1d66e8863c79
         }
 
         window.clear(Color::Black);
@@ -50,6 +56,12 @@ int main()
 		//rect3.Move(deltaTime);
 
         window.draw(*circ.getShape());
+<<<<<<< HEAD
+=======
+        /*if (input.Shoot() == true) {
+            circ.Move(deltaTime);
+        }*/
+>>>>>>> ebdc6becba364579115c1e113ebb1d66e8863c79
 
 		deltaTime = deltaClock.restart().asSeconds();
         window.display();
