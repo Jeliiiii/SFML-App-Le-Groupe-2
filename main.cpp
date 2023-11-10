@@ -44,7 +44,8 @@ int main()
 		//rect3.Move(deltaTime);
 
         window.draw(*circ.getShape());
-        if (input.Shoot() == true) {
+        if (input.Shoot() == true) 
+        {
             circ.Move(deltaTime);
         }
 

@@ -14,16 +14,19 @@ void Input::InputHandler(Event event, RenderWindow& window)
 
 	if (event.type == Event::KeyPressed)
 	{
-		if (event.key.code == Keyboard::Escape){
+		if (event.key.code == Keyboard::Escape)
+		{
 			window.close();
 		}
 
-		if (event.key.code == Mouse::Left) {
+		if (event.key.code == Mouse::Left) 
+		{
 			shoot = true;
 		}
 	}
 }
 
-bool Input::Shoot(){
+bool Input::Shoot()
+{
 	return shoot;
 }

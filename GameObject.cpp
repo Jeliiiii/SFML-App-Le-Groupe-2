@@ -2,7 +2,8 @@
 #include <iostream>
 #include <cmath>
 
-GameObject::GameObject(float x, float y, float w, float h, float speed, Color color) {
+GameObject::GameObject(float x, float y, float w, float h, float speed, Color color) 
+{
 
 	position.x = x;
 	position.y = y;
@@ -19,7 +20,8 @@ GameObject::GameObject(float x, float y, float w, float h, float speed, Color co
 
 };
 
-GameObject::GameObject(float x, float y, float r, float speed, Color color) {
+GameObject::GameObject(float x, float y, float r, float speed, Color color) 
+{
 
 	position.x = x;
 	position.y = y;
@@ -35,25 +37,29 @@ GameObject::GameObject(float x, float y, float r, float speed, Color color) {
 
 }
 
-Vector2f GameObject::getPosition(){
+Vector2f GameObject::getPosition()
+{
 	return position;
 }
 
-void GameObject::setOrigin(float x, float y) {
+void GameObject::setOrigin(float x, float y) 
+{
 	position.x = x;
 	position.y = y;
 
 }
 
 
-void GameObject::Move(float deltaTime) {
+void GameObject::Move(float deltaTime) 
+{
 
 	/*Vector2i mousePosition = Mouse::getPosition(window);
 	Vector2f mousePositionLocal = window.mapPixelToCoords(mousePosition);*/
 	Vector2f direction = mousePositionLocal - GameObject::getPosition();
 
 	float magnitude = sqrt(direction.x * direction.x + direction.y * direction.y);
-	if (magnitude != 0) {
+	if (magnitude != 0) 
+	{
 		direction /= magnitude;
 	}
 
@@ -63,8 +69,7 @@ void GameObject::Move(float deltaTime) {
 
 }
 
-Shape* GameObject::getShape() {
-
+Shape* GameObject::getShape() 
+{
 	return pShape;
-
 }
