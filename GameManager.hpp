@@ -15,7 +15,7 @@ public:
 	//Prototypes fonctions
 
 	void InputHandler(Event event, RenderWindow& window);
-	bool Shoot();
+	bool getShoot();
 	Vector2i getMousePosition();
 	Vector2i getMousePositionLocal();
 

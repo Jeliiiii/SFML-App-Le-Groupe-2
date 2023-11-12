@@ -10,56 +10,41 @@ int main()
 
     window.setVerticalSyncEnabled(true);
 
-    GameObject rect(100, 100, 300, 200, 50, Color::Red);
-	GameObject rect2(200, 200, 300, 100, 50, Color::Blue);
-	GameObject rect3(500, 400, 200, 150, 100, Color::Green);
+    GameObject rect(100, 100, 300, 200, 100, 50, Color::Red);
+	GameObject rect2(200, 200, 300, 100, 100, 50, Color::Blue);
+	GameObject rect3(500, 400, 200, 150, 100, 100, Color::Green);
     GameObject circ(300, 300, 50, 50, Color::Yellow);
 
     while (window.isOpen()) 
     {
-
         Event event;
 		
         while (window.pollEvent(event))
         {
             input.InputHandler(event, window);
-			if (input.Shoot() == true)
-			{
-				circ.Move(deltaTime);
-			}
-            float deltaX = input.getMousePositionLocal().x - circ.getPosition().x;
-            float deltaY = input.getMousePositionLocal().y - circ.getPosition().y;
-
-            float angleRadians = atan2(deltaY, deltaX);
-            float angleDegrees = angleRadians * (180.0f / 3.14159f);
-
-            circ.setRotation(angleDegrees);
-            if (input.Shoot() == true) {
-                circ.Move(deltaTime);
-            }
+        }
 
         window.clear(Color::Black);
 
         // C'est ici qu'on dessine les éléments du jeu
 
         window.draw(*rect.getShape());
-        //rect.Move(deltaTime);
+        rect.Move(deltaTime);
 
-		window.draw(*rect2.getShape());
-		//rect2.Move(deltaTime);
+        window.draw(*rect2.getShape());
+        if (input.getShoot() == true)
+        {
+            rect2.setRotation(135);
+            rect2.Move(deltaTime);
+        }
 
-		window.draw(*rect3.getShape());
-		//rect3.Move(deltaTime);
+        window.draw(*rect3.getShape());
+        rect3.Move(deltaTime);
 
         window.draw(*circ.getShape());
-        /*if (input.Shoot() == true) {
-            circ.Move(deltaTime);
-        }*/
 
-		deltaTime = deltaClock.restart().asSeconds();
+        deltaTime = deltaClock.restart().asSeconds();
         window.display();
-		
     }
-
     return 0;
 }

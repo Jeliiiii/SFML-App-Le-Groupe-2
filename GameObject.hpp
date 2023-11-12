@@ -3,6 +3,10 @@
 #include <SFML/Graphics.hpp> 
 #include <iostream>
 #include <vector> 
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
+#define _USE_MATH_DEFINES
 
 using namespace sf;
 using namespace std;
@@ -14,7 +18,7 @@ class GameObject
 public:
 
     // Constructeurs de la classe GameObject
-    GameObject(float x, float y, float w, float h, float speed, Color color); // Constructeur pour les rectangles
+    GameObject(float x, float y, float w, float h, float orientation, float speed, Color color); // Constructeur pour les rectangles
     GameObject(float x, float y, float r, float speed, Color color); // Constructeur pour les cercles
 
     Shape* getShape(); // Fonction pour obtenir la forme du GameObject
@@ -29,8 +33,8 @@ private:
     float w; // Largeur
     float h; // Hauteur
     float r; // Rayon (pour les cercles)
-    float rotationAngle; // Angle de rotation (pour certains objets)
 	float speed;
+    float orientation = 0;
     Vector2f position; //Position;
     Vector2f direction;
 };

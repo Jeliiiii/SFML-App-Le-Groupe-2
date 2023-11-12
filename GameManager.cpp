@@ -7,39 +7,33 @@ Input::Input()
 
 void Input::InputHandler(Event event, RenderWindow& window)
 {
+	Vector2i mousePosition = Mouse::getPosition(window);
+	Vector2f mousePositionLocal = window.mapPixelToCoords(mousePosition);
+
 	if (event.type == Event::Closed)
 	{
 		window.close();
 	}
 
-	if (event.type == Event::KeyPressed)
+	if ((event.type == Event::KeyPressed) && (event.key.code == Keyboard::Escape))
 	{
-		if (event.key.code == Keyboard::Escape)
-		{
-			window.close();
-		}
+		window.close();
 	}
 
-	if (event.type == Event::MouseButtonPressed)
+	if ((event.type == Event::MouseButtonPressed) && (event.mouseButton.button == Mouse::Left))
 	{
-		if (event.mouseButton.button == Mouse::Left)
-		{
-			Vector2i mousePosition = Mouse::getPosition(window);
-			Vector2f mousePositionLocal = window.mapPixelToCoords(mousePosition);
-			shoot = true;
-		}
+		shoot = true;
+		cout << "bite";
 	}
 
-	if (event.type == Event::MouseButtonReleased)
+	if ((event.type == Event::MouseButtonReleased) && (event.mouseButton.button == Mouse::Left))
 	{
-		if (event.mouseButton.button == Mouse::Left)
-		{
-			shoot = false;
-		}
+		shoot = false;
+		cout << "bite2";
 	}
 }
 
-bool Input::Shoot()
+bool Input::getShoot()
 {
 	return shoot;
 }
