@@ -23,13 +23,11 @@ void Input::InputHandler(Event event, RenderWindow& window)
 	if ((event.type == Event::MouseButtonPressed) && (event.mouseButton.button == Mouse::Left))
 	{
 		shoot = true;
-		cout << "bite";
 	}
 
 	if ((event.type == Event::MouseButtonReleased) && (event.mouseButton.button == Mouse::Left))
 	{
 		shoot = false;
-		cout << "bite2";
 	}
 }
 

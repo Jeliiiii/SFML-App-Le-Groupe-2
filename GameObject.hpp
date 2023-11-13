@@ -22,10 +22,12 @@ public:
     GameObject(float x, float y, float r, float speed, Color color); // Constructeur pour les cercles
 
     Shape* getShape(); // Fonction pour obtenir la forme du GameObject
+	Vector2f getPosition();
 	void Move(float deltaTime);
-    void setRotation(float angle);
-    void setOrigin(float x, float y);
-    Vector2f getPosition();
+    void setRotationAngle(float angle);
+    void VerticalBounce();
+    void HorizontalBounce();
+    void CollideWindow();
 
 private:
     Shape* pShape; // Pointeur vers la forme graphique (rectangle, cercle ou autre)
