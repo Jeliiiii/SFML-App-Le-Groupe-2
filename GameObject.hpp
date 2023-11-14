@@ -19,7 +19,7 @@ public:
 
     // Constructeurs de la classe GameObject
     GameObject(float x, float y, float w, float h, float orientation, float speed, Color color); // Constructeur pour les rectangles
-    GameObject(float x, float y, float r, float speed, Color color); // Constructeur pour les cercles
+    GameObject(float x, float y, float r, float orientation, float speed, Color color); // Constructeur pour les cercles
 
     Shape* getShape(); // Fonction pour obtenir la forme du GameObject
 	Vector2f getPosition();
@@ -37,6 +37,7 @@ private:
     float r; // Rayon (pour les cercles)
 	float speed;
     float orientation = 0;
+    bool firstCollision;
     Vector2f position; //Position;
     Vector2f direction;
 };

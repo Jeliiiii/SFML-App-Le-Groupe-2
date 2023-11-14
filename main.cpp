@@ -10,10 +10,10 @@ int main()
 
     window.setVerticalSyncEnabled(true);
 
-    GameObject rect(100, 100, 200, 200, 45, 50, Color::Red);
-	GameObject rect2(200, 200, 100, 100, 45, 50, Color::Blue);
-	GameObject rect3(500, 400, 150, 150, 45, 100, Color::Green);
-    GameObject circ(300, 300, 50, 50, Color::Yellow);
+    GameObject rect(200, 200, 50, 50, 180, 200, Color::Red);
+	/*GameObject rect2(200, 200, 100, 100, 0, 50, Color::Blue);
+	GameObject rect3(500, 400, 150, 150, 0, 100, Color::Green);*/
+    GameObject circ(300, 300, 50, 90, 200, Color::Yellow);
 
     while (window.isOpen()) 
     {
@@ -27,23 +27,15 @@ int main()
         window.clear(Color::Black);
 
         // C'est ici qu'on dessine les éléments du jeu       
-        window.draw(*rect3.getShape());
+        /*window.draw(*rect3.getShape());*/
         window.draw(*circ.getShape());
-        window.draw(*rect2.getShape());
+        /*window.draw(*rect2.getShape());*/
         window.draw(*rect.getShape());
 
-		circ.Move(deltaTime);
-        
-
+		circ.Move(deltaTime);     
 		rect.Move(deltaTime);
-        rect.CollideWindow();
-
-		rect2.Move(deltaTime);
-        rect2.CollideWindow();
-
-		rect3.Move(deltaTime);
-        rect3.CollideWindow();
-
+		/*rect2.Move(deltaTime);
+		rect3.Move(deltaTime);*/
         //if (input.getShoot() == true)
         //{            
         //}

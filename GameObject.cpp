@@ -18,18 +18,19 @@ GameObject::GameObject(float x, float y, float w, float h, float orientation, fl
 	pShape = new RectangleShape(Vector2f(w, h));
 	pShape->setPosition(position.x, position.y);
 	pShape->setFillColor(color);
-	pShape->setOrigin(w / 2, h / 2);
+	pShape->setOrigin(w / 2.0f, h / 2.0f);
 	setRotationAngle(orientation);
 
 };
 
-GameObject::GameObject(float x, float y, float r, float speed, Color color)
+GameObject::GameObject(float x, float y, float r, float orientation, float speed, Color color)
 {
 
 	position.x = x;
 	position.y = y;
 
 	this->r = r;
+	this->orientation = orientation;
 	this->speed = speed;
 	this->color = color;
 
@@ -37,6 +38,7 @@ GameObject::GameObject(float x, float y, float r, float speed, Color color)
 	pShape->setPosition(position.x, position.y);
 	pShape->setFillColor(color);
 	pShape->setOrigin(w / 2, h / 2);
+	setRotationAngle(orientation);
 
 };
 
@@ -57,6 +59,7 @@ void GameObject::Move(float deltaTime)
 {
 	float x = pShape->getPosition().x + direction.x * deltaTime * speed;
 	float y = pShape->getPosition().y + direction.y * deltaTime * speed;
+	CollideWindow();
 	pShape->setPosition(x, y);
 }
 
@@ -67,30 +70,67 @@ Shape* GameObject::getShape()
 
 void GameObject::VerticalBounce()
 {
-	setRotationAngle(0 - orientation);
+	setRotationAngle(-orientation);
+	cout << direction.x << ";" << direction.y << endl;
 }
 
 void GameObject::HorizontalBounce()
 {
 	setRotationAngle(180 - orientation);
+	cout << direction.x << ";" << direction.y << endl;
 }
 
 void GameObject::CollideWindow()
 {
-
-	bool firstCollision = false;
+	firstCollision = false;
 	Vector2f position = pShape->getPosition();
+	float halfWidth = w / 2.0f;
+	float halfHeight = h / 2.0f;
 
-	if (position.x - (w/2) < 0 || position.x + w - (w / 2) > WIN_WIDTH)
+	if (firstCollision == true) 
 	{
-		HorizontalBounce();
-		position = pShape->getPosition();
-	}
+		if (position.x - halfWidth <= 0)
+		{
+			HorizontalBounce();
+			direction.x = -direction.x;
+			position.x = halfWidth;
+			firstCollision = false;
+		}
 
-	if (position.y - (h/2) < 0 || position.y + h - (h / 2) > WIN_HEIGHT)
-	{
-		VerticalBounce();
-		position = pShape->getPosition();
+		if (firstCollision == true)
+		{
+			HorizontalBounce();
+			direction.x = -direction.x;
+			position.x = halfWidth;
+			firstCollision = false;
+		}
+
+		else if (position.x + halfWidth >= WIN_WIDTH)
+		{
+			HorizontalBounce();
+			direction.x = -direction.x;
+			position.x = WIN_WIDTH - halfWidth;
+			firstCollision = false;
+		}
+
+
+		if (position.y - halfHeight <= 0)
+		{
+			VerticalBounce();
+			direction.y = -direction.y;
+			position.y = halfHeight;
+			firstCollision = false;
+		}
+
+		else if (position.y + halfHeight >= WIN_HEIGHT)
+		{
+			VerticalBounce();
+			direction.y = -direction.y;
+			position.y = WIN_HEIGHT - halfHeight;
+			firstCollision = false;
+		}
 	}
+	
+	pShape->setPosition(position);
 
 }
