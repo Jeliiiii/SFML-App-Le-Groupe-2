@@ -23,6 +23,7 @@ public:
     GameObject(float x, float y, float r, float orientation, float speed, Color color); // Constructeur pour les cercles
 
     Shape* getShape(); // Fonction pour obtenir la forme du GameObject
+    Shape* getHitbox();
 	Vector2f getPosition();
 	void Move(float deltaTime);
     void setRotationAngle(float angle);
@@ -32,7 +33,7 @@ public:
 	bool CheckObjectCollisionHorizontal(const GameObject* rect1, const GameObject* rect2);
 	bool CheckObjectCollisionVertical(const GameObject* rect1, const GameObject* rect2);
     void CheckCollisions(const GameObject& goOther);
-    void setPosition(float x, float y);
+    void setPositionShape(float x, float y);
 
 private:
     Shape* pShape; // Pointeur vers la forme graphique (rectangle, cercle ou autre)

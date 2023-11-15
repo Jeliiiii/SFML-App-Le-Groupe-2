@@ -15,14 +15,11 @@ GameObject::GameObject(float x, float y, float w, float h, Color color)
 	pShape->setFillColor(color);
 	pShape->setOrigin(w / 2.0f, h / 2.0f);
 
-	setPosition(x, y);
+	pShape->setPosition(x, y);
 };
 
 GameObject::GameObject(float x, float y, float r, float orientation, float speed, Color color)
 {
-
-	position.x = x;
-	position.y = y;
 
 	this->r = r;
 	this->orientation = orientation;
@@ -39,24 +36,28 @@ GameObject::GameObject(float x, float y, float r, float orientation, float speed
 	hitbox = new RectangleShape(Vector2f(w, h));
 	hitbox->setOrigin(w / 2.0f, h / 2.0f);
 
-	setPosition(x, y);
+	setPositionShape(x, y);
 
 	setRotationAngle(orientation);
 };
 
-void GameObject::setPosition(float x, float y)
+void GameObject::setPositionShape(float x, float y)
 {
-
 	position.x = x;
 	position.y = y;
 
-	pShape->setPosition(position.x, position.y);
-	hitbox->setPosition(position.x, position.y);
+	pShape->setPosition(x, y);
+	hitbox->setPosition(x, y);
 }
 
 Vector2f GameObject::getPosition()
 {
 	return position;
+}
+
+Shape* GameObject::getHitbox()
+{
+	return this->hitbox;
 }
 
 void GameObject::setRotationAngle(float angle)
@@ -72,7 +73,9 @@ void GameObject::Move(float deltaTime)
 	float x = pShape->getPosition().x + direction.x * deltaTime * speed;
 	float y = pShape->getPosition().y + direction.y * deltaTime * speed;
 
-	setPosition(x, y);
+	pShape->setPosition(x, y);
+	hitbox->setPosition(x, y);
+	//setPositionShape(x, y);
 }
 
 Shape* GameObject::getShape() 
@@ -133,7 +136,7 @@ void GameObject::CheckWindowCollision()
 	//	position.y = WIN_HEIGHT - halfHeight;
 	//}
 
-	setPosition(position.x, position.y);
+	setPositionShape(position.x, position.y);
 }
 
 bool GameObject::CheckObjectCollisionVertical(const GameObject* rect1, const GameObject* rect2)

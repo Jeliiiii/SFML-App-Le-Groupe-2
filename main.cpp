@@ -32,6 +32,7 @@ int main()
 
         // C'est ici qu'on dessine les éléments du jeu   
         window.draw(*circ.getShape());
+        window.draw(*circ.getHitbox());
         window.draw(*rect.getShape());
 
         window.display();
