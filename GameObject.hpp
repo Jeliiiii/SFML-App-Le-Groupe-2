@@ -30,8 +30,7 @@ public:
     void VerticalBounce();
     void HorizontalBounce();
     void CheckWindowCollision();
-	bool CheckObjectCollisionHorizontal(const GameObject* rect1, const GameObject* rect2);
-	bool CheckObjectCollisionVertical(const GameObject* rect1, const GameObject* rect2);
+	bool CheckObjectCollision(const GameObject* rect1, const GameObject* rect2);
     void CheckCollisions(const GameObject& goOther);
     void setPositionShape(float x, float y);
 

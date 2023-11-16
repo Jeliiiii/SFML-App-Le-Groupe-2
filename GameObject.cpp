@@ -73,9 +73,7 @@ void GameObject::Move(float deltaTime)
 	float x = pShape->getPosition().x + direction.x * deltaTime * speed;
 	float y = pShape->getPosition().y + direction.y * deltaTime * speed;
 
-	pShape->setPosition(x, y);
-	hitbox->setPosition(x, y);
-	//setPositionShape(x, y);
+	setPositionShape(x, y);
 }
 
 Shape* GameObject::getShape() 
@@ -86,15 +84,11 @@ Shape* GameObject::getShape()
 void GameObject::VerticalBounce()
 {
 	direction.y = -direction.y;
-	/*setRotationAngle(-orientation);
-	cout << direction.x << ";" << direction.y << endl;*/
 }
 
 void GameObject::HorizontalBounce()
 {
 	direction.x = -direction.x;
-	/*setRotationAngle(180 - orientation);
-	cout << direction.x << ";" << direction.y << endl;*/
 }
 
 void GameObject::CheckWindowCollision()
@@ -107,7 +101,6 @@ void GameObject::CheckWindowCollision()
 	{
 		std::cout << "LEFT" << std::endl;
 		HorizontalBounce();
-		//direction.x = -direction.x;
 		position.x = halfWidth;
 	}
 
@@ -115,7 +108,6 @@ void GameObject::CheckWindowCollision()
 	{
 		std::cout << "RIGHT" << std::endl;
 		HorizontalBounce();
-		//direction.x = -direction.x;
 		position.x = WIN_WIDTH - halfWidth;
 	}
 
@@ -124,71 +116,84 @@ void GameObject::CheckWindowCollision()
 	{
 		std::cout << "TOP" << std::endl;
 		VerticalBounce();
-		//direction.y = -direction.y;
 		position.y = halfHeight;
 	}
 
-	//if (position.y + halfHeight >= WIN_HEIGHT)
-	//{
-	//	std::cout << "BOTTOM" << std::endl;
-	//	VerticalBounce();
-	//	//direction.x = -direction.x;
-	//	position.y = WIN_HEIGHT - halfHeight;
-	//}
+	if (position.y + halfHeight >= WIN_HEIGHT)
+	{
+		std::cout << "BOTTOM" << std::endl;
+		VerticalBounce();
+		position.y = WIN_HEIGHT - halfHeight;
+	}
 
 	setPositionShape(position.x, position.y);
 }
 
-bool GameObject::CheckObjectCollisionVertical(const GameObject* rect1, const GameObject* rect2)
+bool GameObject::CheckObjectCollision(const GameObject* obj1, const GameObject* obj2)
 {
-	Vector2f position1 = rect1->hitbox->getPosition();
-	Vector2f position2 = rect2->pShape->getPosition();
+	Vector2f position1 = obj1->hitbox->getPosition();
+	Vector2f position2 = obj2->pShape->getPosition();
 
-	float h1 = rect1->h;
-	float h2 = rect2->h;
 
-	float top1 = position1.y - h1 / 2;
-	float bottom1 = position1.y + h1 / 2;
+	float w1 = obj1->w;
+	float w2 = obj2->w;
 
-	float top2 = position2.y - h2 / 2;
-	float bottom2 = position2.y + h2 / 2;
-	
-	return (top1 <= bottom2 && bottom1 >= top2);
-}
+	float left1 = position1.x - w1 / 2.0f;
+	float right1 = position1.x + w1 / 2.0f;
 
-bool GameObject::CheckObjectCollisionHorizontal(const GameObject* rect1, const GameObject* rect2)
-{
-	Vector2f position1 = rect1->hitbox->getPosition();
-	Vector2f position2 = rect2->pShape->getPosition();
+	float left2 = position2.x - w2 / 2.0f;
+	float right2 = position2.x + w2 / 2.0f;
 
-	float w1 = rect1->w;
-	float w2 = rect2->w;
+	float h1 = obj1->h;
+	float h2 = obj2->h;
 
-	float left1 = position1.x - w1 / 2;
-	float right1 = position1.x + w1 / 2;
+	float top1 = position1.y - h1 / 2.0f;
+	float bottom1 = position1.y + h1 / 2.0f;
 
-	float left2 = position2.x - w2 / 2;
-	float right2 = position2.x + w2 / 2;
+	float top2 = position2.y - h2 / 2.0f;
+	float bottom2 = position2.y + h2 / 2.0f;
 
-	return (left1 <= right2 && right1 >= left2);
+	bool collidesX = (left1 <= right2 && right1 >= left2);
+	bool collidesY = (top1 <= bottom2 && bottom1 >= top2);
+
+
+	if (collidesX)
+	{
+		HorizontalBounce();
+		cout << "oui";
+		float overlapX = min(right1 - left2, right2 - left1);
+		if (position1.x < position2.x)
+		{
+			position1.x -= overlapX / 2.0f;
+		}
+		else
+		{
+			position1.x += overlapX / 2.0f;
+		}
+	}
+
+
+	if (collidesY)
+	{
+		VerticalBounce();
+		cout << "non";
+		float overlapY = min(bottom1 - top2, bottom2 - top1);
+		if (position1.y < position2.y) 
+		{
+			position1.y -= overlapY / 2.0f;
+		}
+			
+		else 
+		{
+			position1.y += overlapY / 2.0f;
+		}
+	}
+
+	return collidesX || collidesY;
 }
 
 void GameObject::CheckCollisions(const GameObject& goOther)
 {
-	bool isCollidingHorizontal = CheckObjectCollisionHorizontal(this, &goOther);
-	bool isCollidingVertical = CheckObjectCollisionVertical(this, &goOther);
-	if (isCollidingHorizontal == true)
-	{
-		cout << "hrz" << endl;
-		HorizontalBounce();
-	}
-
-	if (isCollidingVertical == true)
-	{
-		cout << "vrt" << endl;
-		VerticalBounce();
-	}
-
-	hitbox->setPosition(position.x, position.y);
-
+	CheckObjectCollision(this, &goOther);
+	setPositionShape(position.x, position.y);
 }
