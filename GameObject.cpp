@@ -14,7 +14,6 @@ GameObject::GameObject(float x, float y, float w, float h, Color color)
 	pShape = new RectangleShape(Vector2f(w, h));
 	pShape->setFillColor(color);
 	pShape->setOrigin(w / 2.0f, h / 2.0f);
-
 	pShape->setPosition(x, y);
 };
 
@@ -36,18 +35,26 @@ GameObject::GameObject(float x, float y, float r, float orientation, float speed
 	hitbox = new RectangleShape(Vector2f(w, h));
 	hitbox->setOrigin(w / 2.0f, h / 2.0f);
 
-	setPositionShape(x, y);
+	setPositionCircle(x, y);
 
 	setRotationAngle(orientation);
 };
 
-void GameObject::setPositionShape(float x, float y)
+void GameObject::setPositionCircle(float x, float y)
 {
 	position.x = x;
 	position.y = y;
 
 	pShape->setPosition(x, y);
 	hitbox->setPosition(x, y);
+}
+
+void GameObject::setPositionRect(float x, float y)
+{
+	position.x = x;
+	position.y = y;
+
+	pShape->setPosition(x, y);
 }
 
 Vector2f GameObject::getPosition()
@@ -73,7 +80,7 @@ void GameObject::Move(float deltaTime)
 	float x = pShape->getPosition().x + direction.x * deltaTime * speed;
 	float y = pShape->getPosition().y + direction.y * deltaTime * speed;
 
-	setPositionShape(x, y);
+	setPositionCircle(x, y);
 }
 
 Shape* GameObject::getShape() 
@@ -119,21 +126,20 @@ void GameObject::CheckWindowCollision()
 		position.y = halfHeight;
 	}
 
-	if (position.y + halfHeight >= WIN_HEIGHT)
+	/*if (position.y + halfHeight >= WIN_HEIGHT)
 	{
 		std::cout << "BOTTOM" << std::endl;
 		VerticalBounce();
 		position.y = WIN_HEIGHT - halfHeight;
-	}
+	}*/
 
-	setPositionShape(position.x, position.y);
+	setPositionCircle(position.x, position.y);
 }
 
-bool GameObject::CheckObjectCollision(const GameObject* obj1, const GameObject* obj2)
+void GameObject::CheckObjectCollision(const GameObject* obj1, const GameObject* obj2)
 {
 	Vector2f position1 = obj1->hitbox->getPosition();
 	Vector2f position2 = obj2->pShape->getPosition();
-
 
 	float w1 = obj1->w;
 	float w2 = obj2->w;
@@ -153,47 +159,32 @@ bool GameObject::CheckObjectCollision(const GameObject* obj1, const GameObject* 
 	float top2 = position2.y - h2 / 2.0f;
 	float bottom2 = position2.y + h2 / 2.0f;
 
-	bool collidesX = (left1 <= right2 && right1 >= left2);
-	bool collidesY = (top1 <= bottom2 && bottom1 >= top2);
-
-
-	if (collidesX)
+	if (right1 > left2 && left1 < right2)
 	{
-		HorizontalBounce();
-		cout << "oui";
-		float overlapX = min(right1 - left2, right2 - left1);
-		if (position1.x < position2.x)
+		if (bottom1 > top2 && top1 < bottom2)
 		{
-			position1.x -= overlapX / 2.0f;
-		}
-		else
-		{
-			position1.x += overlapX / 2.0f;
+			float overlapX = min(right1, right2) - max(left1, left2);
+			float overlapY = min(bottom1, bottom2) - max(top1, top2);
+			if (overlapX > overlapY)
+			{
+				if ((top1 < top2 || bottom1 > bottom2))
+				{
+					VerticalBounce();
+				}
+			}
+			else
+			{
+				if ((left1 < left2 || right1 > right2))
+				{
+					HorizontalBounce();
+				}
+			}
 		}
 	}
-
-
-	if (collidesY)
-	{
-		VerticalBounce();
-		cout << "non";
-		float overlapY = min(bottom1 - top2, bottom2 - top1);
-		if (position1.y < position2.y) 
-		{
-			position1.y -= overlapY / 2.0f;
-		}
-			
-		else 
-		{
-			position1.y += overlapY / 2.0f;
-		}
-	}
-
-	return collidesX || collidesY;
 }
 
 void GameObject::CheckCollisions(const GameObject& goOther)
 {
 	CheckObjectCollision(this, &goOther);
-	setPositionShape(position.x, position.y);
+	setPositionCircle(position.x, position.y);
 }

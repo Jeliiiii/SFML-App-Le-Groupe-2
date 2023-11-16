@@ -1,41 +1,46 @@
-//#include <cmath>
+//// Move sprite
+//playerSprite.move(movement* deltaTime.asSeconds());
 //
-//// ...
+//// Set bounding box to current position
+//boundingBox.setPosition(playerSprite.getPosition());
 //
-//int main() {
-//    // ...
-//
-//    while (window.isOpen()) {
-//        Event event;
-//        while (window.pollEvent(event)) {
-//            if (event.type == Event::MouseButtonPressed && event.mouseButton.button == Mouse::Left) {
-//                // Récupérez la position de la souris
-//                Vector2i mousePosition = Mouse::getPosition(window);
-//
-//                // Convertissez la position de la souris en coordonnées locales de la fenêtre
-//                Vector2f mousePositionLocal = window.mapPixelToCoords(mousePosition);
-//
-//                // Calculez la différence entre la position de la souris et la position de votre objet
-//                float deltaX = mousePositionLocal.x - ball.getPosition().x;
-//                float deltaY = mousePositionLocal.y - ball.getPosition().y;
-//
-//                // Calculez l'angle en radians
-//                float angleRadians = std::atan2(deltaY, deltaX);
-//
-//                // Convertissez l'angle en degrés si nécessaire
-//                float angleDegrees = angleRadians * (180.0f / 3.14159f);
-//
-//                // Utilisez l'angle pour définir la rotation de votre objet
-//                ball.SetRotation(angleDegrees);
+//// Check for collision
+//for (auto layer = myLoader.GetLayers().begin(); layer != myLoader.GetLayers().end(); ++layer)
+//{
+//    if (layer->name == "Collision")
+//    {
+//        for (auto object = layer->objects.begin(); object != layer->objects.end(); ++object)
+//        {
+//            // collision = object->GetAABB().intersects(boundingBox.getGlobalBounds());     
+//            if ((boundingBox.getPosition().x + boundingBox.getGlobalBounds().width > object->GetPosition().x && boundingBox.getPosition().x < object->GetPosition().x + object->GetAABB().width) && (boundingBox.getPosition().y + boundingBox.getGlobalBounds().height > object->GetPosition().y && boundingBox.getPosition().y < object->GetPosition().y + object->GetAABB().height))
+//            {
+//                if ((boundingBox.getPosition().x > object->GetPosition().x) &&
+//                    (boundingBox.getPosition().x + boundingBox.getGlobalBounds().width > object->GetPosition().x + object->GetAABB().width))
+//                {
+//                    boundingBox.setPosition(object->GetPosition().x + object->GetAABB().width, boundingBox.getPosition().y);
+//                    std::cout << "Collide on left" << std::endl;
+//                }
+//                else if ((boundingBox.getPosition().x < object->GetPosition().x) &&
+//                    (boundingBox.getPosition().x + boundingBox.getGlobalBounds().width < object->GetPosition().x + object->GetAABB().width))
+//                {
+//                    boundingBox.setPosition(object->GetPosition().x - boundingBox.getGlobalBounds().width, boundingBox.getPosition().y);
+//                    std::cout << "Collide on right" << std::endl;
+//                }
+//                else if ((boundingBox.getPosition().y > object->GetPosition().y) &&
+//                    (boundingBox.getPosition().y + boundingBox.getGlobalBounds().height > object->GetPosition().y + object->GetAABB().height))
+//                {
+//                    boundingBox.setPosition(boundingBox.getPosition().x, object->GetPosition().y + object->GetAABB().height);
+//                    std::cout << "Collide on top" << std::endl;
+//                }
+//                else if ((boundingBox.getPosition().y < object->GetPosition().y) &&
+//                    (boundingBox.getPosition().y + boundingBox.getGlobalBounds().height < object->GetPosition().y + object->GetAABB().height))
+//                {
+//                    boundingBox.setPosition(boundingBox.getPosition().x, object->GetPosition().y - boundingBox.getGlobalBounds().height);
+//                    std::cout << "Collide on bottom" << std::endl;
+//                }
 //            }
 //        }
-//
-//        // Dessinez et déplacez votre objet
-//        window.draw(*ball.getShape());
-//        ball.Move(deltaTime);
-//
-//        // ...
 //    }
-//
-//    return 0;
 //}
+//
+//playerSprite.setPosition(boundingBox.getPosition());

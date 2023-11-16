@@ -30,9 +30,10 @@ public:
     void VerticalBounce();
     void HorizontalBounce();
     void CheckWindowCollision();
-	bool CheckObjectCollision(const GameObject* rect1, const GameObject* rect2);
+	void CheckObjectCollision(const GameObject* rect1, const GameObject* rect2);
     void CheckCollisions(const GameObject& goOther);
-    void setPositionShape(float x, float y);
+    void setPositionCircle(float x, float y);
+    void setPositionRect(float x, float y);
 
 private:
     Shape* pShape; // Pointeur vers la forme graphique (rectangle, cercle ou autre)
