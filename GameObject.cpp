@@ -188,3 +188,15 @@ void GameObject::CheckCollisions(const GameObject& goOther)
 	CheckObjectCollision(this, &goOther);
 	setPositionCircle(position.x, position.y);
 }
+
+void GameObject::CollisionAll(const vector<GameObject*> objects)
+{
+	for (int i = 0; i < objects.size(); ++i)
+	{
+		CheckCollisions(*objects[i]);
+		for (int j = 0; j < objects.size(); ++j)
+		{
+			CheckCollisions(*objects[j]);
+		}
+	}
+}

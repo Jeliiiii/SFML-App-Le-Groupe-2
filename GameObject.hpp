@@ -34,6 +34,7 @@ public:
     void CheckCollisions(const GameObject& goOther);
     void setPositionCircle(float x, float y);
     void setPositionRect(float x, float y);
+    void CollisionAll(const vector<GameObject*> objects);
 
 private:
     Shape* pShape; // Pointeur vers la forme graphique (rectangle, cercle ou autre)
