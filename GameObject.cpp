@@ -126,12 +126,12 @@ void GameObject::CheckWindowCollision()
 		position.y = halfHeight;
 	}
 
-	/*if (position.y + halfHeight >= WIN_HEIGHT)
+	if (position.y + halfHeight >= WIN_HEIGHT)
 	{
 		std::cout << "BOTTOM" << std::endl;
 		VerticalBounce();
 		position.y = WIN_HEIGHT - halfHeight;
-	}*/
+	}
 
 	setPositionCircle(position.x, position.y);
 }
@@ -170,6 +170,7 @@ void GameObject::CheckObjectCollision(const GameObject* obj1, const GameObject* 
 				if ((top1 < top2 || bottom1 > bottom2))
 				{
 					VerticalBounce();
+					cout << "VERTICAL";
 				}
 			}
 			else
@@ -177,6 +178,7 @@ void GameObject::CheckObjectCollision(const GameObject* obj1, const GameObject* 
 				if ((left1 < left2 || right1 > right2))
 				{
 					HorizontalBounce();
+					cout << "HORIZONTAL";
 				}
 			}
 		}

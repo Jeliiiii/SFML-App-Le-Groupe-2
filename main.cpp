@@ -6,8 +6,6 @@ float deltaTime = 0; //Variable qui reset la clock à 0 et récupère le temps qui 
 
 void DrawAll(const vector<GameObject*> objects, RenderWindow& window)
 {
-    float x = 300;
-    float y = 300;
     for (int i = 0; i < objects.size(); ++i)
     {
         for (int j = 0; j < objects.size(); ++j)
@@ -24,22 +22,20 @@ int main()
     window.setVerticalSyncEnabled(true);
     window.setFramerateLimit(120);
 
-    float x = 300;
-    float y = 300;
+    float x = 100;
+    float y = 100;
 
     vector<GameObject*> rects;
 
-    for (int i = 0; i < 10; ++i)
+    for (int i = 0; i < 3; ++i)
     {
-        for (int j = 0; j < 10; ++j)
+        for (int j = 0; j < 8; ++j)
         {
-            rects.push_back(new GameObject(x, y, 200, 50, Color::Red));
-            x + 50;
-            y + 50;
+            rects.push_back(new GameObject((j+1)*85, (i+1)*85, 70, 50, Color::Red));
         }
     }
 
-    GameObject circ(300, 300, 10, 80, 800, Color::Yellow);
+    GameObject circ(300, 575, 10, 80, 800, Color::Yellow);
 
     Event event;
     while (window.isOpen()) 
