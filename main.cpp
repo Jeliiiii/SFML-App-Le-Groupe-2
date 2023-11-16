@@ -15,12 +15,13 @@ int main()
     float y = 300;
 
     vector<GameObject*> rects;
-    for (int i = 0; i < 10; ++i) 
+    for (int i = 0; i < 10; ++i)
     {
         for (int j = 0; j < 10; ++j)
         {
             rects.push_back(new GameObject(x, y, 200, 50, Color::Red));
             x + 50;
+            window.draw(rects[i][j]);
         }
         y + 50;
     }
